@@ -13,7 +13,8 @@ var db = mongo.db("mongodb://localhost:27017/nodetest2", {
 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var feed = require('./routes/feed');
+
 
 
 var app = express();
@@ -39,7 +40,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/feed', feed);
+
 
 
 // catch 404 and forward to error handler
