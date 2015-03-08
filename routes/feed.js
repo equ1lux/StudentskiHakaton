@@ -3,9 +3,7 @@ var router = express.Router();
 //*MongoDB
 var mongo = require('mongoskin');
 var db = mongo.db(
-  "mongodb://mirza:0123456789>@ds053251.mongolab.com:53251/hakmof", [
-    "scraped_twitter", "trends_data"
-  ]);
+  "mongodb://mirzamaznikar:0123456789@ds053251.mongolab.com:53251/hakmof");
 var twitterCollection = db.collection("scraped_twitter");
 
 var Twitter = require('twitter');
@@ -53,6 +51,7 @@ function parseJSON(tweets) {
   var tweetFavouriteCount;
   var tweetRetweetedCount;
   tweetCreatedAt = tweets['created_at'];
+  var rows = [];
 
   tweetText = tweets['text'];
   tweetUserName = tweets['user']['name'];
@@ -68,7 +67,6 @@ function parseJSON(tweets) {
     console.log("tags " + tweetHashTags.push(tweets['entities']['hashtags'][j]
       ['text']));
   }
-
   console.log("tweet " + tweetCreatedAt + " " + tweetUserName + " " +
     tweetText);
   //	collection.insert(tweetHashTags, function(err, result) {});
@@ -80,8 +78,8 @@ function parseJSON(tweets) {
  */
 router.get('/userlist', function(req, res) {
   var db = req.db;
-  db.collection('userlist').find().toArray(function(err, items) {
-    res.json(items);
+  db.collection('scraped_data').find().toArray(function(err, items) {
+    console.log("log " + res.json(items));
   });
 });
 
