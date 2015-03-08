@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 //*MongoDB
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://dumyan:testestes123@ds053251.mongolab.com:53251/hakmof", 
+var db = mongo.db("mongodb://<USER:PASS>@ds053251.mongolab.com:53251/hakmof", 
 	["scraped_data", "trends_data"]);
 
 
