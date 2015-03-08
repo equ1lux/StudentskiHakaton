@@ -28,8 +28,9 @@ var tmp = 0;
 client.stream('user', function(stream) {
   stream.on('data', function(tweet) {
     tmp = tmp + 1;
-    //console.log("twitterStream " + tmp + " " + JSON.stringify(tweet));
+
     if (tmp > 1) {
+      console.log("twitterStream " + tmp + " " + JSON.stringify(tweet));
       parseJSON(tweet);
     }
   });
@@ -42,45 +43,26 @@ client.stream('user', function(stream) {
 
 
 function parseJSON(tweets) {
-  var tweetCreatedAt;
-  var tweetText;
-  var tweetUserName;
-  var tweetFollowersCount;
-  var tweetStatusesCount;
-  var tweetProfileImageURL;
+
+  var objekt = {};
+
+
+  objekt.tweetCreatedAt = tweets['created_at'];
+  objekt.tweetText = tweets['text'];
+  //console.log("tuka e " + objekt.tweetText);
+  objekt.tweetUserName = tweets['user']['name'];
+  objekt.tweetFollowersCount = tweets['user']['followers_count'];
+  objekt.tweetStatusesCount = tweets['user']['statuses_count'];
+  objekt.tweetProfileImageURL = tweets['user']['profile_image_url'];
+  objekt.tweetFavouriteCount = tweets['favorite_count'];
+  objekt.tweetRetweetedCount = tweets['retweet_count'];
   var tweetHashTags = [];
-  var tweetFavouriteCount;
-  var tweetRetweetedCount;
-  tweetCreatedAt = tweets['created_at'];
-
-  tweetText = tweets['text'];
-  tweetUserName = tweets['user']['name'];
-  tweetFollowersCount = tweets['user']['followers_count'];
-  tweetStatusesCount = tweets['user']['statuses_count'];
-  tweetProfileImageURL = tweets['user']['profile_image_url'];
-
-  tweetFavouriteCount = tweets['favorite_count'];
-  tweetRetweetedCount = tweets['retweet_count'];
-
-  tweetHashTags = [];
   for (var j in tweets['entities']['hashtags']) {
-    console.log("tags " + tweetHashTags.push(tweets['entities']['hashtags'][j]
-      ['text']));
+    tweetHashTags.push(tweets['entities']['hashtags'][j]['text']);
   }
-  var row = [tweetCreatedAt, tweetText, tweetUserName,
-    tweetFollowersCounttweetStatusesCount, tweetProfileImageURL,
-    tweetFavouriteCount, tweetRetweetedCount, tweetHashTags
-  ];
-  console.log(JSON.stringify(row));
-  db.collection('scraped_twitter').insert("aloo", function(err, result) {
-    res.send(
-      (err === null) ? {
-        msg: ''
-      } : {
-        msg: JSON.stringify(err)
-      }
-    );
-  });
+  objekt.tweetHashTags = tweetHashTags;
+  //console.log(JSON.stringify(objekt));
+  db.collection('scraped_twitter').insert(objekt, function(err, result) {});
 }
 
 
@@ -90,6 +72,7 @@ function parseJSON(tweets) {
 router.get('/userlist', function(req, res) {
   var db = req.db;
   db.collection('scraped_data').find().toArray(function(err, items) {
+
     console.log("log " + res.json(items));
   });
 });
