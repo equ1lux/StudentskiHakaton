@@ -14,7 +14,7 @@ graph.setAccessToken(token.fb.token);
 
 //*MongoDB
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://mirza:0123456789@ds053251.mongolab.com:53251/hakmof", 
+var db = mongo.db("mongodb://<USER:PASS>@ds053251.mongolab.com:53251/hakmof", 
 	["scraped_data", "trends_data"]);
 
 
