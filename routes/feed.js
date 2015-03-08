@@ -4,7 +4,7 @@ var router = express.Router();
 var mongo = require('mongoskin');
 var db = mongo.db(
   "mongodb://mirzamaznikar:0123456789@ds053251.mongolab.com:53251/hakmof");
-var twitterCollection = db.collection("scraped_twitter");
+
 
 var Twitter = require('twitter');
 var params = {
@@ -40,6 +40,7 @@ client.stream('user', function(stream) {
 });
 
 
+
 function parseJSON(tweets) {
   var tweetCreatedAt;
   var tweetText;
@@ -51,7 +52,6 @@ function parseJSON(tweets) {
   var tweetFavouriteCount;
   var tweetRetweetedCount;
   tweetCreatedAt = tweets['created_at'];
-  var rows = [];
 
   tweetText = tweets['text'];
   tweetUserName = tweets['user']['name'];
@@ -67,9 +67,20 @@ function parseJSON(tweets) {
     console.log("tags " + tweetHashTags.push(tweets['entities']['hashtags'][j]
       ['text']));
   }
-  console.log("tweet " + tweetCreatedAt + " " + tweetUserName + " " +
-    tweetText);
-  //	collection.insert(tweetHashTags, function(err, result) {});
+  var row = [tweetCreatedAt, tweetText, tweetUserName,
+    tweetFollowersCounttweetStatusesCount, tweetProfileImageURL,
+    tweetFavouriteCount, tweetRetweetedCount, tweetHashTags
+  ];
+  console.log(JSON.stringify(row));
+  db.collection('scraped_twitter').insert("aloo", function(err, result) {
+    res.send(
+      (err === null) ? {
+        msg: ''
+      } : {
+        msg: JSON.stringify(err)
+      }
+    );
+  });
 }
 
 
