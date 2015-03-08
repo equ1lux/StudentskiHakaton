@@ -15,9 +15,44 @@ var client = new Twitter({
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
   if (!error) {
-    console.log("json?:", tweets);
+    parseJSON(tweets);
   }
 });
+
+function parseJSON(tweets)
+{
+  var tweetCreatedAt;
+  var tweetText;
+  var tweetUserName;
+  var tweetFollowersCount;
+  var tweetStatusesCount;
+  var tweetProfileImageURL;
+  var tweetHashTags = [];
+  var tweetFavouriteCount;
+  var tweetRetweetedCount;
+
+  for (var i in tweets) {
+    tweetCreatedAt = tweets[i]['created_at'];
+
+    tweetText =  tweets[i]['text'];
+    tweetUserName = tweets[i]['user']['name'];
+    tweetFollowersCount = tweets[i]['user']['followers_count'];
+    tweetStatusesCount = tweets[i]['user']['statuses_count'];
+    tweetProfileImageURL = tweets[i]['user']['profile_image_url'];
+
+    tweetFavouriteCount = tweets[i]['favorite_count'];
+    tweetRetweetedCount = tweets[i]['retweet_count'];
+
+    tweetHashTags = [];
+     for (var j in tweets[i]['entities']['hashtags']) {
+      tweetHashTags.push(tweets[i]['entities']['hashtags'][j]['text']);
+     }
+
+     console.log(tweetHashTags);
+  }
+
+
+}
 
 /*
  * GET userlist.
