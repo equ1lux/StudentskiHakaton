@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 
 //*MongoDB
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/nodetest2", {
-	native_parser: true
-});
+var db = mongo.db("mongodb://dumyan:testestes123@ds053251.mongolab.com:53251/hakmof", 
+	["scraped_data", "trends_data"]);
 
 
 var routes = require('./routes/index');
