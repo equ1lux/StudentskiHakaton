@@ -30,7 +30,7 @@ function populateTable() {
   var tableContent = '';
 
   // jQuery AJAX call for JSON
-  $.getJSON('/users/userlist', function(data) {
+  $.getJSON('/feed/userlist', function(data) {
 
     // For each item in our JSON, add a table row and cells to the content string
     $.each(data, function() {
@@ -104,7 +104,7 @@ function addUser(event) {
     $.ajax({
       type: 'POST',
       data: newUser,
-      url: '/users/adduser',
+      url: '/feed/adduser',
       dataType: 'JSON'
     }).done(function(response) {
 

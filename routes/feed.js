@@ -74,7 +74,7 @@ router.post('/adduser', function(req, res) {
       (err === null) ? {
         msg: ''
       } : {
-        msg: err
+        msg: JSON.stringify(err)
       }
     );
   });
