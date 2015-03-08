@@ -10,9 +10,13 @@
     "cookie-parser": "~1.3.4",
     "debug": "~2.1.1",
     "ejs": "^2.3.1",
+<<<<<<< HEAD
     "everyauth": "^0.4.9",
     "express": "~4.12.0",
     "fbgraph": "^0.3.0",
+=======
+    "express": "~4.12.0",
+>>>>>>> d58fb79d4a9728e7cacee44c01592cb883268ed9
     "html": "0.0.7",
     "jade": "~1.9.2",
     "mongodb": "*",
