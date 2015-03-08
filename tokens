@@ -1,0 +1,4 @@
+module.exports = {
+    fb: {                     token:"CAAE7jN334hYBAN8vWBsZBYmyCxILMqif38LMu2ZCHgpKxu5hK85aom0IxJAhuYZBXHKgVYvvpAYBcF6Hl8h0GezuJdY1lURJluOlf8zjLQrZBa9DltZAtSAWywEDhBSCjIFdGaZBoWsEyvzWCLyqmQmbTvcSDNSCTocxoGJZCoACETZAQ5ZBAPAtRFce5XUupCL7sFyWBD59NoumQAEHxW4dD"
+    }
+}
